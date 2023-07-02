@@ -9,16 +9,17 @@
     <style>
       body {
         margin: 0;
+        padding: 0;
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;
         align-content: flex-start;
+        height: 100vh; /* Set the height of the body to fill the viewport */
         overflow: hidden;
       }
-
       div {
-        height: 16.5px;
-        width: 16px;
+        height: 2%;
+        width: 1%;
         background-color: skyblue;
       }
     </style>
@@ -42,9 +43,9 @@
         return column;
       }
 
-      for (let i = 1; i <= 48; i++) {
+      for (let i = 1; i <= 50; i++) {
         let num = i;
-        for (let k = 1; k <= 96; k++) {
+        for (let k = 1; k <= 100; k++) {
           createHTMLElement("div", numToLetter(num), k);
         }
       }
