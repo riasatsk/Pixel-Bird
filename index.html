@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+        overflow: hidden;
+      }
+
+      div {
+        height: 16.5px;
+        width: 16px;
+        background-color: skyblue;
+      }
+    </style>
+  </head>
+  <body>
+  
+    </audio>
+    
+    <script>
+      let app = document.body;
+      app.style.backgroundColor = "black";
+      function createHTMLElement(tagName, className1, className2) {
+        const element = document.createElement(tagName);
+        element.classList.add(className1, className2);
+        app.appendChild(element);
+      }
+      function numToLetter(number) {
+        let column = "";
+        while (number > 0) {
+          let remainder = (number - 1) % 26;
+          column = String.fromCharCode(65 + remainder) + column;
+          number = Math.floor((number - 1) / 26);
+        }
+        return column;
+      }
+
+      for (let i = 1; i <= 48; i++) {
+        let num = i;
+        for (let k = 1; k <= 96; k++) {
+          createHTMLElement("div", numToLetter(num), k);
+        }
+      }
+      
+
+ // Variable to track if audio has been played
+ var audioPlayed = false;
+    var audio;
+
+    // Function to play audio
+    function playAudio() {
+      if (!audioPlayed) {
+        audio = new Audio('sound.mp3');
+        audio.addEventListener('ended', function() {
+          audio.currentTime = 0; // Reset audio to start
+          audio.play(); // Play again
+        });
+        audio.play();
+        audioPlayed = true;
+      }
+    }
+
+    // Event listener for spacebar keypress
+    document.addEventListener('keydown', function(event) {
+      if (event.code === 'Space') {
+        playAudio();
+      }
+    });
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
