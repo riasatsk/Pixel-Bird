@@ -72,6 +72,28 @@ function animatePixelHozReverse(row, color = "dodgerblue", speed = 10) {
 }
 
 //Game Code
+// Define the variable to be controlled by the wheel event
+let playerPosition = 24;
+drawPixel(numToLetter(playerPosition), 35, "yellow");
+
+// Define the function to be executed when the "wheel" event occurs
+function handleWheel(event) {
+  // Increase or decrease the variable value based on the wheel scrolling
+  if (event.deltaY > 0) {
+    playerPosition++; // Increase the value
+    drawPixel(numToLetter(playerPosition), 35, "yellow");
+    clean(numToLetter(playerPosition - 1), 35);
+  } else {
+    playerPosition--; // Decrease the value
+    drawPixel(numToLetter(playerPosition), 35, "yellow");
+    clean(numToLetter(playerPosition + 1), 35);
+  }
+
+  // Your code logic here
+}
+
+// Add the "wheel" event listener to the target element
+document.addEventListener("wheel", handleWheel);
 
 function hozblock(a, b, color) {
   for (let i = a; i <= b; i++) {
@@ -126,34 +148,109 @@ function animateBlockHozReverse(col, hight1, hight2) {
   }
   loopWithDelay();
 }
+let sadEmoji = [
+  "🥲",
+  "😔",
+  "😟",
+  "🥺",
+  "🥹",
+  "😓",
+  "😞",
+  "😖",
+  "😭",
+  "😢",
+  "😥",
+];
+let point = 0;
+let gameScreen = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Over</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
 
+    .game-over {
+      text-align: center;
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    .try-again-button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #fff;
+      background-color: #007bff;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .try-again-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+`;
 function gamestart() {
   let a = Math.ceil(Math.random() * 20) + 2;
   let b = Math.ceil(Math.random() * 10) + 2;
   animateBlockHozReverse(91, a, b);
+  point++;
+  updateGameScreen = `
+  <body>
+    <div class="game-over">
+    <h1>${point}</h1>
+      <h1>Game Over ${sadEmoji[Math.floor(Math.random() * 11)]}</h1>
+      <p>Unfortunately, you lost the game.</p>
+      <a href="index.html" class="try-again-button">Try Again</a>
+    </div>
+  </body>
+  </html>
+  `;
 }
-
-// Define the variable to be controlled by the wheel event
-let variableValue = 24;
-drawPixel(numToLetter(variableValue), 35, "yellow");
-
-// Define the function to be executed when the "wheel" event occurs
-function handleWheel(event) {
-  // Increase or decrease the variable value based on the wheel scrolling
-  if (event.deltaY > 0) {
-    variableValue++; // Increase the value
-    drawPixel(numToLetter(variableValue), 35, "yellow");
-    clean(numToLetter(variableValue - 1), 35);
-  } else {
-    variableValue--; // Decrease the value
-    drawPixel(numToLetter(variableValue), 35, "yellow");
-    clean(numToLetter(variableValue + 1), 35);
-  }
-
-  // Your code logic here
-}
-
-// Add the "wheel" event listener to the target element
-document.addEventListener("wheel", handleWheel);
 
 setInterval(gamestart, 750);
+
+// Now you can use the `gameScreen` variable to insert the HTML into your page or manipulate it as needed.
+
+function endGame() {
+  // Get the element by class name
+  var element = document.getElementsByClassName("35")[playerPosition];
+
+  // Get the computed style of the element
+  var computedStyle = window.getComputedStyle(element);
+
+  // Get the background color
+  var bgColor = computedStyle.backgroundColor;
+
+  // Display the background color
+  if (bgColor != "rgb(135, 206, 235)") {
+    document.write(gameScreen + updateGameScreen);
+  }
+}
+setInterval(endGame, 5);
