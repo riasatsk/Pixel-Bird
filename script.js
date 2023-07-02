@@ -74,10 +74,12 @@ function animatePixelHozReverse(row, color = "dodgerblue", speed = 10) {
 //Game Code
 // Define the variable to be controlled by the wheel event
 let playerPosition = 24;
+//draw player
 drawPixel(numToLetter(playerPosition), 35, "yellow");
 
 // Define the function to be executed when the "wheel" event occurs
 function handleWheel(event) {
+
   // Increase or decrease the variable value based on the wheel scrolling
   if (event.deltaY > 0) {
     playerPosition++; // Increase the value
@@ -100,7 +102,7 @@ function hozblock(a, b, color) {
     hozLine(numToLetter(i), color);
   }
 }
-
+//This is ground pixel green and Brown
 hozblock(40, 42, "#72ba28");
 hozblock(42, 48, "#8e5e1c");
 
@@ -228,13 +230,53 @@ function gamestart() {
       <h1>Game Over ${sadEmoji[Math.floor(Math.random() * 11)]}</h1>
       <p>Unfortunately, you lost the game.</p>
       <a href="index.html" class="try-again-button">Try Again</a>
+      <h3>Click Space button to turn on Music 🔉</h3>
     </div>
+   
   </body>
   </html>
   `;
 }
 
-setInterval(gamestart, 750);
+//  // Variable to track if audio has been played
+//  var audioPlayed = false;
+//     var audio;
+
+//     // Function to play audio
+//     function playAudio() {
+//       if (!audioPlayed) {
+//         audio = new Audio('sound.mp3');
+//         audio.addEventListener('ended', function() {
+//           audio.currentTime = 0; // Reset audio to start
+//           audio.play(); // Play again
+//         });
+//         audio.play();
+//         audioPlayed = true;
+//       }
+//     }
+
+//     // Event listener for spacebar keypress
+//     document.addEventListener('keydown', function(event) {
+//       if (event.code === 'Space') {
+//         playAudio();
+//       }
+//     });
+// Create an Audio object
+var audio = new Audio();
+
+// Set the audio source
+audio.src = "sound.mp3";
+
+// Play the audio
+
+// Stop the audio
+audio.currentTime = 0;
+    // Event listener for spacebar keypress
+    document.addEventListener('keydown', function(event) {
+      if (event.code === 'Space') {
+        audio.play()
+      }
+    });
 
 // Now you can use the `gameScreen` variable to insert the HTML into your page or manipulate it as needed.
 
@@ -250,7 +292,11 @@ function endGame() {
 
   // Display the background color
   if (bgColor != "rgb(135, 206, 235)") {
+    audio.pause();
     document.write(gameScreen + updateGameScreen);
   }
 }
+
+setInterval(gamestart, 750);
+
 setInterval(endGame, 5);
