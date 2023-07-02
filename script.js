@@ -278,7 +278,7 @@ function endGame() {
     document.write(gameScreen + updateGameScreen);
   }
 }
-let gamespeed = 750;
-setInterval(gamestart, gamespeed);
+
+setInterval(gamestart, 750);
 
 setInterval(endGame, 5);
