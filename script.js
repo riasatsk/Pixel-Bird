@@ -223,7 +223,7 @@ function gamestart() {
   let b = Math.ceil(Math.random() * 20);
   if (a + b > 38) {
     a = a - 2;
-    b = b - 2;
+    b = b - 3;
   }
   animateBlockHozReverse(91, a, b);
   point++;
