@@ -7,7 +7,7 @@ function numToLetter(number) {
   }
   return column;
 }
-let bgcolor="skyblue"
+let bgcolor = "skyblue";
 function drawPixel(row, col, color) {
   let pixel = document.getElementsByClassName(row)[col];
   pixel.style.backgroundColor = color;
@@ -79,12 +79,8 @@ function hozblock(a, b, color) {
   }
 }
 
-// hozblock(1, 3, "azure");
-// hozblock(3, 5, "green");
 hozblock(40, 42, "#72ba28");
 hozblock(42, 48, "#8e5e1c");
-
-
 
 function gameblock(col, color, a, b) {
   for (let i = a; i <= b; i++) {
@@ -108,7 +104,7 @@ function downblock(a, hight) {
   }
 }
 
-function animateBlockHozReverse(col, hight1,hight2) {
+function animateBlockHozReverse(col, hight1, hight2) {
   async function loopWithDelay() {
     for (let i = col; (i) => 0; i--) {
       upblock(i, hight1);
@@ -120,12 +116,10 @@ function animateBlockHozReverse(col, hight1,hight2) {
       if (clm > 4) {
         cleanblock(clm, 1, hight1);
         cleanblock(clm, 39 - hight2, 39);
-
       } else {
         for (let i = 4; (i) => 0; i--) {
           cleanblock(i, 1, hight1);
           cleanblock(i, 39 - hight2, 39);
-
         }
       }
     }
@@ -133,60 +127,33 @@ function animateBlockHozReverse(col, hight1,hight2) {
   loopWithDelay();
 }
 
-
-// function animateBlockHozReversedown(col, hight) {
-//   async function loopWithDelay2() {
-//     for (let i = col; (i) => 0; i--) {
-//       downblock(i, hight);
-//       let clm = i + 4;
-//       // Add a time delay of 1 second between iterations
-//       await delay(15);
-//       if (clm > 4) {
-//         cleanblock(clm, 39 - hight, 39);
-//       } else {
-//         for (let i = 4; (i) => 0; i--) {
-//           cleanblock(i, 39 - hight, 39);
-//         }
-//       }
-//     }
-//   }
-//   loopWithDelay2();
-// }
-
 function gamestart() {
-  let a = Math.ceil(Math.random() * 20)+2;
-  let b = Math.ceil(Math.random() * 10)+2;
-  animateBlockHozReverse(91, a,b);
-
+  let a = Math.ceil(Math.random() * 20) + 2;
+  let b = Math.ceil(Math.random() * 10) + 2;
+  animateBlockHozReverse(91, a, b);
 }
-
-
-
 
 // Define the variable to be controlled by the wheel event
 let variableValue = 24;
-
+drawPixel(numToLetter(variableValue), 35, "yellow");
 
 // Define the function to be executed when the "wheel" event occurs
 function handleWheel(event) {
   // Increase or decrease the variable value based on the wheel scrolling
   if (event.deltaY > 0) {
     variableValue++; // Increase the value
-  drawPixel(numToLetter(variableValue),20,"yellow")
-clean(numToLetter(variableValue-1),20)
+    drawPixel(numToLetter(variableValue), 35, "yellow");
+    clean(numToLetter(variableValue - 1), 35);
   } else {
     variableValue--; // Decrease the value
-  drawPixel(numToLetter(variableValue),20,"yellow")
-  clean(numToLetter(variableValue+1),20)
-
+    drawPixel(numToLetter(variableValue), 35, "yellow");
+    clean(numToLetter(variableValue + 1), 35);
   }
-  
+
   // Your code logic here
 }
 
 // Add the "wheel" event listener to the target element
-document.addEventListener('wheel', handleWheel);
+document.addEventListener("wheel", handleWheel);
 
-
-// animateplayer()
-setInterval(gamestart,750)
+setInterval(gamestart, 750);
