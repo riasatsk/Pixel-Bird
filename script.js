@@ -274,11 +274,12 @@ function endGame() {
   // Display the background color
   if (bgColor != "rgb(135, 206, 235)") {
     audio.src = "File/game_over.mp3";
+    audio.loop = false;
+
     audio.play();
     document.write(gameScreen + updateGameScreen);
   }
 }
-
 setInterval(gamestart, 750);
 
 setInterval(endGame, 5);
