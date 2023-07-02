@@ -8,19 +8,22 @@ function numToLetter(number) {
   return column;
 }
 let bgcolor = "skyblue";
+
+// Main DrawPixel Function
 function drawPixel(row, col, color) {
   let pixel = document.getElementsByClassName(row)[col];
   pixel.style.backgroundColor = color;
   return pixel;
 }
+
 function hozLine(row, color) {
-  for (let i = 0; i <= 95; i++) {
+  for (let i = 0; i <= 99; i++) {
     drawPixel(row, i, color);
   }
 }
 
 function vertLine(col, color) {
-  for (let i = 1; i <= 48; i++) {
+  for (let i = 1; i <= 50; i++) {
     drawPixel(numToLetter(i), col, color);
   }
 }
@@ -33,7 +36,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function animatePixelHoz(row, color = "dodgerblue", speed = 10) {
   async function loopWithDelay() {
-    for (let i = 0; i <= 95; i++) {
+    for (let i = 0; i <= 99; i++) {
       drawPixel(row, i, color);
 
       // Add a time delay of 1 second between iterations
@@ -46,7 +49,7 @@ function animatePixelHoz(row, color = "dodgerblue", speed = 10) {
 
 function animatePixelVert(col, color = "dodgerblue", speed = 10) {
   async function loopWithDelay() {
-    for (let i = 1; i <= 48; i++) {
+    for (let i = 1; i <= 50; i++) {
       let row = numToLetter(i);
       drawPixel(row, col, color);
 
@@ -60,7 +63,7 @@ function animatePixelVert(col, color = "dodgerblue", speed = 10) {
 
 function animatePixelHozReverse(row, color = "dodgerblue", speed = 10) {
   async function loopWithDelay() {
-    for (let i = 95; (i) => 0; i--) {
+    for (let i = 99; i >= 0; i--) {
       drawPixel(row, i, color);
 
       // Add a time delay of 1 second between iterations
@@ -74,7 +77,7 @@ function animatePixelHozReverse(row, color = "dodgerblue", speed = 10) {
 //From Here Game Code is Start
 
 // Define the variable to be controlled by the wheel event
-let playerPosition = 24;
+let playerPosition = 25;
 //draw player
 drawPixel(numToLetter(playerPosition), 35, "yellow");
 
@@ -103,12 +106,15 @@ function hozblock(a, b, color) {
   }
 }
 //This is ground pixel green and Brown
-hozblock(40, 42, "#72ba28");
-hozblock(42, 48, "#8e5e1c");
+hozblock(42, 45, "#72ba28");
+hozblock(45, 50, "#8e5e1c");
 
 function gameblock(col, color, a, b) {
-  for (let i = a; i <= b; i++) {
-    drawPixel(numToLetter(i), col, color);
+  if (col >= 0 && col <= 99) {
+    // Check if col is within the valid range
+    for (let i = a; i <= b; i++) {
+      drawPixel(numToLetter(i), col, color);
+    }
   }
 }
 
@@ -119,18 +125,23 @@ function upblock(a, hight) {
 }
 
 function cleanblock(col, a, b) {
-  gameblock(col, bgcolor, a, b);
+  if (col >= 0 && col <= 99) {
+    // Check if col is within the valid range
+    for (let i = a; i <= b; i++) {
+      drawPixel(numToLetter(i), col, bgcolor);
+    }
+  }
 }
 
 function downblock(a, hight) {
   for (let i = a; i <= a + 4; i++) {
-    gameblock(i, "#393D3F", 39 - hight, 39);
+    gameblock(i, "#393D3F", 41 - hight, 41);
   }
 }
 
 function animateBlockHozReverse(col, hight1, hight2) {
   async function loopWithDelay() {
-    for (let i = col; (i) => 0; i--) {
+    for (let i = col; i >= 0; i--) {
       upblock(i, hight1);
       downblock(i, hight2);
 
@@ -139,17 +150,18 @@ function animateBlockHozReverse(col, hight1, hight2) {
       await delay(15);
       if (clm > 4) {
         cleanblock(clm, 1, hight1);
-        cleanblock(clm, 39 - hight2, 39);
+        cleanblock(clm, 41 - hight2, 41);
       } else {
-        for (let i = 4; (i) => 0; i--) {
-          cleanblock(i, 1, hight1);
-          cleanblock(i, 39 - hight2, 39);
+        for (let j = 4; j >= 0; j--) {
+          cleanblock(j, 1, hight1);
+          cleanblock(j, 41 - hight2, 41);
         }
       }
     }
   }
   loopWithDelay();
 }
+
 let sadEmoji = [
   "🥲",
   "😔",
@@ -225,7 +237,7 @@ function gamestart() {
     a = a - 2;
     b = b - 3;
   }
-  animateBlockHozReverse(91, a, b);
+  animateBlockHozReverse(95, a, b);
   point++;
   updateGameScreen = `
   <body>
@@ -260,7 +272,7 @@ document.addEventListener("keydown", function (event) {
 });
 
 // Now you can use the `gameScreen` variable to insert the HTML into your page or manipulate it as needed.
-
+let exit = false;
 function endGame() {
   // Get the element by class name
   var element = document.getElementsByClassName("35")[playerPosition - 1];
@@ -275,11 +287,24 @@ function endGame() {
   if (bgColor != "rgb(135, 206, 235)") {
     audio.src = "File/game_over.mp3";
     audio.loop = false;
-
-    audio.play();
     document.write(gameScreen + updateGameScreen);
+    exit = true;
   }
 }
-setInterval(gamestart, 750);
+// Start the setInterval loop and store its ID
+const interval_start = setInterval(function () {
+  // Code to be executed repeatedly
+  gamestart();
+}, 750);
 
-setInterval(endGame, 5);
+// Start the setInterval loop and store its ID
+const interval_end = setInterval(function () {
+  // Code to be executed repeatedly
+  endGame();
+  // Condition to check if you want to exit the loop
+  if (exit == true) {
+    // Clear the interval and exit the loop
+    clearInterval(interval_end);
+    clearInterval(interval_start);
+  }
+}, 5);
