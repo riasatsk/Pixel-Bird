@@ -1,67 +1,76 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Riasat Pixel Bird Game</title>
-  <style>
-    body {
-      background-color: #F2F2F2;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    
-    h1 {
-      color: #333333;
-      font-size: 36px;
-      margin-bottom: 30px;
-    }
-    
-    .button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 24px;
-      margin: 10px;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-    
-    .play-button {
-      background-color: #FF8800;
-    }
-    
-    .option-button {
-      background-color: #0077FF;
-    }
-    
-    .github-button {
-      background-color: #333333;
-    }
-    
-    .button:hover {
-      opacity: 0.8;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <img src="bird.gif" height="250px" width="250px">
-    <h1>Welcome to the Game</h1>
-    <a href="game.html" class="button play-button" onclick="audio.play()">Play</a>
-    <a href="option.html" class="button option-button">Options</a>
-    <a href="https://github.com/riasatsk" class="button github-button" target="_blank">GitHub</a>
-  </div>
-</body>
+  <head>
+    <link rel="icon" type="image/png" href="File/favicon.png" />
+
+    <title>Riasat Pixel Bird Game</title>
+    <style>
+      body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      h1 {
+        color: #333333;
+        font-size: 36px;
+        margin-bottom: 30px;
+      }
+
+      .button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 24px;
+        margin: 10px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      .play-button {
+        background-color: #ff8800;
+      }
+
+      .option-button {
+        background-color: #0077ff;
+      }
+
+      .github-button {
+        background-color: #333333;
+      }
+
+      .button:hover {
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img src="File/bird.gif" height="250px" width="250px" />
+      <h1>Welcome to the Game</h1>
+      <a href="game.html" class="button play-button" onclick="audio.play()"
+        >Play</a
+      >
+      <a href="Pages/option.html" class="button option-button">Options</a>
+      <a
+        href="https://github.com/riasatsk"
+        class="button github-button"
+        target="_blank"
+        >GitHub</a
+      >
+    </div>
+  </body>
 </html>

@@ -71,11 +71,13 @@ function animatePixelHozReverse(row, color = "dodgerblue", speed = 10) {
   loopWithDelay();
 }
 
-//Game Code
+
+//From Here Game Code is Start
+
 // Define the variable to be controlled by the wheel event
 let playerPosition = 24;
 //draw player
-drawPixel(numToLetter(playerPosition), 35, "yellow");
+drawPixel(numToLetter(playerPosition), 35, "yellow")
 
 // Define the function to be executed when the "wheel" event occurs
 function handleWheel(event) {
@@ -91,7 +93,7 @@ function handleWheel(event) {
     clean(numToLetter(playerPosition + 1), 35);
   }
 
-  // Your code logic here
+  // Your code logic her
 }
 
 // Add the "wheel" event listener to the target element
@@ -226,7 +228,7 @@ function gamestart() {
   updateGameScreen = `
   <body>
     <div class="game-over">
-    <h1>${point}</h1>
+    <h1>${point-1}</h1>
       <h1>Game Over ${sadEmoji[Math.floor(Math.random() * 11)]}</h1>
       <p>Unfortunately, you lost the game.</p>
       <a href="index.html" class="try-again-button">Try Again</a>
@@ -265,7 +267,7 @@ function gamestart() {
 var audio = new Audio();
 
 // Set the audio source
-audio.src = "sound.mp3";
+audio.src = "File/sound.mp3";
 
 // Play the audio
 
@@ -292,7 +294,8 @@ function endGame() {
 
   // Display the background color
   if (bgColor != "rgb(135, 206, 235)") {
-    audio.pause();
+    audio.src="File/game_over.wav";
+    audio.play();
     document.write(gameScreen + updateGameScreen);
   }
 }
