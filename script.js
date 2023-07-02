@@ -161,29 +161,32 @@ function gamestart() {
 }
 
 
-// animatePixelHoz("AD");
-// animatePixelHozReverse("AD");
-// gamestart()
 
-function animateplayer() {
-  async function loopWithDelay() {
-    for (let i = 24; (i) <=39; i++) {
-      drawPixel(numToLetter(i),25,"yellow");
-document.addEventListener('keydown', function(event) {
-  // Check if the key pressed is the spacebar
-  if (event.code === 'Space') {
-    // Perform your desired action here
-    drawPixel(numToLetter(i),25,"yellow");
+
+// Define the variable to be controlled by the wheel event
+let variableValue = 24;
+
+
+// Define the function to be executed when the "wheel" event occurs
+function handleWheel(event) {
+  // Increase or decrease the variable value based on the wheel scrolling
+  if (event.deltaY > 0) {
+    variableValue++; // Increase the value
+  drawPixel(numToLetter(variableValue),20,"yellow")
+clean(numToLetter(variableValue-1),20)
+  } else {
+    variableValue--; // Decrease the value
+  drawPixel(numToLetter(variableValue),20,"yellow")
+  clean(numToLetter(variableValue+1),20)
 
   }
-});
-   
-      // Add a time delay of 1 second between iterations
-      await delay(250);
-clean(numToLetter(i),25)
-    }
-  }
-  loopWithDelay();
+  
+  // Your code logic here
 }
-animateplayer()
+
+// Add the "wheel" event listener to the target element
+document.addEventListener('wheel', handleWheel);
+
+
+// animateplayer()
 setInterval(gamestart,750)
