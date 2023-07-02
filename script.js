@@ -71,17 +71,15 @@ function animatePixelHozReverse(row, color = "dodgerblue", speed = 10) {
   loopWithDelay();
 }
 
-
 //From Here Game Code is Start
 
 // Define the variable to be controlled by the wheel event
 let playerPosition = 24;
 //draw player
-drawPixel(numToLetter(playerPosition), 35, "yellow")
+drawPixel(numToLetter(playerPosition), 35, "yellow");
 
 // Define the function to be executed when the "wheel" event occurs
 function handleWheel(event) {
-
   // Increase or decrease the variable value based on the wheel scrolling
   if (event.deltaY > 0) {
     playerPosition++; // Increase the value
@@ -221,14 +219,17 @@ let gameScreen = `
 
 `;
 function gamestart() {
-  let a = Math.ceil(Math.random() * 20) + 2;
-  let b = Math.ceil(Math.random() * 10) + 2;
+  let a = Math.ceil(Math.random() * 20);
+  let b = Math.ceil(Math.random() * 20);
+  if (a + b > 38) {
+    a = a - 2;
+  }
   animateBlockHozReverse(91, a, b);
   point++;
   updateGameScreen = `
   <body>
     <div class="game-over">
-    <h1>${point-1}</h1>
+    <h1>${point - 1}</h1>
       <h1>Game Over ${sadEmoji[Math.floor(Math.random() * 11)]}</h1>
       <p>Unfortunately, you lost the game.</p>
       <a href="index.html" class="try-again-button">Try Again</a>
@@ -240,30 +241,6 @@ function gamestart() {
   `;
 }
 
-//  // Variable to track if audio has been played
-//  var audioPlayed = false;
-//     var audio;
-
-//     // Function to play audio
-//     function playAudio() {
-//       if (!audioPlayed) {
-//         audio = new Audio('sound.mp3');
-//         audio.addEventListener('ended', function() {
-//           audio.currentTime = 0; // Reset audio to start
-//           audio.play(); // Play again
-//         });
-//         audio.play();
-//         audioPlayed = true;
-//       }
-//     }
-
-//     // Event listener for spacebar keypress
-//     document.addEventListener('keydown', function(event) {
-//       if (event.code === 'Space') {
-//         playAudio();
-//       }
-//     });
-// Create an Audio object
 var audio = new Audio();
 
 // Set the audio source
@@ -273,18 +250,18 @@ audio.src = "File/sound.mp3";
 
 // Stop the audio
 audio.currentTime = 0;
-    // Event listener for spacebar keypress
-    document.addEventListener('keydown', function(event) {
-      if (event.code === 'Space') {
-        audio.play()
-      }
-    });
+// Event listener for spacebar keypress
+document.addEventListener("keydown", function (event) {
+  if (event.code === "Space") {
+    audio.play();
+  }
+});
 
 // Now you can use the `gameScreen` variable to insert the HTML into your page or manipulate it as needed.
 
 function endGame() {
   // Get the element by class name
-  var element = document.getElementsByClassName("35")[playerPosition];
+  var element = document.getElementsByClassName("35")[playerPosition - 1];
 
   // Get the computed style of the element
   var computedStyle = window.getComputedStyle(element);
@@ -294,12 +271,12 @@ function endGame() {
 
   // Display the background color
   if (bgColor != "rgb(135, 206, 235)") {
-    audio.src="File/game_over.wav";
+    audio.src = "File/game_over.wav";
     audio.play();
     document.write(gameScreen + updateGameScreen);
   }
 }
-
-setInterval(gamestart, 750);
+let gamespeed = 750;
+setInterval(gamestart, gamespeed);
 
 setInterval(endGame, 5);
