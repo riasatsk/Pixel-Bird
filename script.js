@@ -259,7 +259,6 @@ var audio = new Audio();
 // Set the audio source
 audio.src = "File/sound.mp3";
 
-// Play the audio
 
 // Stop the audio
 audio.currentTime = 0;
@@ -287,6 +286,7 @@ function endGame() {
   if (bgColor != "rgb(135, 206, 235)") {
     audio.src = "File/game_over.mp3";
     audio.loop = false;
+    audio.play();
     document.write(gameScreen + updateGameScreen);
     exit = true;
   }
