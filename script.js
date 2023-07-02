@@ -223,6 +223,7 @@ function gamestart() {
   let b = Math.ceil(Math.random() * 20);
   if (a + b > 38) {
     a = a - 2;
+    b = b - 1;
   }
   animateBlockHozReverse(91, a, b);
   point++;
@@ -254,6 +255,7 @@ audio.currentTime = 0;
 document.addEventListener("keydown", function (event) {
   if (event.code === "Space") {
     audio.play();
+    audio.loop = true;
   }
 });
 
@@ -271,7 +273,7 @@ function endGame() {
 
   // Display the background color
   if (bgColor != "rgb(135, 206, 235)") {
-    audio.src = "File/game_over.wav";
+    audio.src = "File/game_over.mp3";
     audio.play();
     document.write(gameScreen + updateGameScreen);
   }
